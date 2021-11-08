@@ -1,9 +1,3 @@
-const warning = `Привет, если ты проверяешь эту работу то наверняка заметил, что при первом вызове функции, выдает ошибку.
-Дело в том, что что-то намудрил с асинхронностью, но код прекрасно работает, если вызвать функцию повторно!
-Ошибку пока не нашел, буду признателен, если не будешь сильно снижать оценку за этот недостаток,
-а еще лучше напиши мне в Дискорд если знаешь, как исправить. Спасибо! :)
-`
-console.log(warning);
 const fs = require('fs');
 const path = require('path');
 
@@ -148,9 +142,15 @@ async function copyAssetsFile() {
 
 async function buildPage() {
   await init(mainFolderPath);
-  await changeTemplate();
-  await mergeStyleCssFile();
-  await copyAssetsFile();
+  setTimeout(() => {
+    changeTemplate();
+  }, 500);
+  setTimeout(() => {
+    mergeStyleCssFile();
+  }, 1000);
+  setTimeout(() => {
+    copyAssetsFile();
+  }, 1500);
 }
 
 buildPage();
