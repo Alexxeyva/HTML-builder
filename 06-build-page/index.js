@@ -75,8 +75,8 @@ async function mergeStyleCssFile() {
       if (file.isFile()) {
         const extension = path.extname(file.name)
         if (extension === '.css') {
-          const pathFile = path.join(__dirname, `styles/${file.name}`)
-          fs.readFile(pathFile, 'utf-8', (err, content) => {
+          // const pathFile = path.join(__dirname, `styles/${file.name}`)
+          fs.readFile(path.join(filePathStyle, file.name), 'utf-8', (err, content) => {
             if (err) {
               throw err;
             }
