@@ -6,7 +6,7 @@ const filePathCopy = path.join(__dirname, 'files-copy');
 
 function func() {
   init()
-  clearCopyFolder()
+  // clearCopyFolder()
   copyFiles()
 }
 
@@ -33,7 +33,9 @@ function clearCopyFolder() {
   .then(elements => {
     for (let file of elements) {
       fs.unlink(filePathCopy + `\\${file}`, err => {
-        if (err) throw err;
+        if (err) {
+          console.log('There is no directory to clean up!');
+        };
       });
     }
   })
@@ -50,8 +52,10 @@ function copyFiles() {
   // datas are fetched
   .then(elements => {
     for (let file of elements) {
-      const pathFiles = path.join(__dirname, 'files/');
-      fs.copyFile(pathFiles + `${file}`, filePathCopy + `\\${file}`, err => {
+      // const pathFiles = path.join(__dirname, 'files/');
+      const srcPath = path.join(filePathOrigin, file);
+      const destPath = path.join(filePathCopy, file);
+      fs.copyFile(srcPath, destPath, err => {
         if (err) throw  err;
         console.log(`${file} copied!`);
       });
