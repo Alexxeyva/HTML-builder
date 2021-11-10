@@ -6,7 +6,7 @@ const filePathCopy = path.join(__dirname, 'files-copy');
 
 function func() {
   init()
-  // clearCopyFolder()
+  clearCopyFolder()
   copyFiles()
 }
 
@@ -27,15 +27,17 @@ function init() {
 
 // Clearing the contents of the files-copy folder
 function clearCopyFolder() {
-  fs.promises.readdir(filePathCopy)
+  if (filePathCopy) {
+    fs.promises.readdir(filePathCopy)
   // If promise resolved and
   // datas are fetched
   .then(elements => {
     for (let file of elements) {
       fs.unlink(filePathCopy + `\\${file}`, err => {
         if (err) {
-          console.log('There is no directory to clean up!');
+          throw err;
         };
+        console.log(`${path.basename(file)} cleared!`);
       });
     }
   })
@@ -43,6 +45,8 @@ function clearCopyFolder() {
   .catch(err => {
     console.log(err)
   })
+  }
+
 }
 
 // Copy the contents of the files folder to folder-copy

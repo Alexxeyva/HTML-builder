@@ -37,15 +37,17 @@ function mergeBundleCssFile() {
 
 // Clearing the contents of the bundle.css
 function clearBundleFile() {
-  fs.truncate(filePathBundle, 0, (err) => {
-    if (err) {
-      throw err
-    }
-    console.log(`${path.basename(filePathBundle)} cleared!`)})
+  if (filePathBundle) {
+    fs.truncate(filePathBundle, 0, (err) => {
+      if (err) {
+        throw err
+      }
+      console.log(`${path.basename(filePathBundle)} cleared!`)})
+  }
 }
 
 function createBundle() {
-  // clearBundleFile()
+  clearBundleFile()
   mergeBundleCssFile();
 }
 
