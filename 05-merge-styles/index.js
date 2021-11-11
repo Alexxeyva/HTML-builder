@@ -38,11 +38,7 @@ function mergeBundleCssFile() {
 // Clearing the contents of the bundle.css
 function clearBundleFile() {
   if (filePathBundle) {
-    fs.truncate(filePathBundle, 0, (err) => {
-      if (err) {
-        throw err
-      }
-      console.log(`${path.basename(filePathBundle)} cleared!`)})
+    fs.promises.rm(filePathBundle, { recursive: true, force: true });
   }
 }
 
